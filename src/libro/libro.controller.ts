@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, HttpCode } from '@nestjs/common';
 import { LibroService } from './libro.service';
-import { CreateLibroDto } from './dto/create-libro.dto';
-import { UpdateLibroDto } from './dto/update-libro.dto';
+import { LibroDto } from './dto/libro.dto';
+import { plainToInstance } from 'class-transformer';
+import { Libro } from './entities/libro.entity';
 
 @Controller('libros')
 export class LibroController {
   constructor(private readonly libroService: LibroService) {}
 
   @Post()
-  create(@Body() createLibroDto: CreateLibroDto) {
-    return null;
-  }
-
-  @Get()
-  findAll() {
-    return null;
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return null;
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLibroDto: UpdateLibroDto) {
-    return null;
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return null;
-  }
+    async create(@Body() libroDto: LibroDto) {
+      const biblioteca : Libro = plainToInstance(Libro, libroDto);
+      return await this.libroService.create(biblioteca);
+    }
+  
+    @Get()
+    async findAll() {
+      return await this.libroService.findAll();
+    }
+  
+    @Get(':libroId')
+    async findOne(@Param('libroId') libroId: string) {
+      return await this.libroService.findOne(libroId);
+    }
+  
+    @Put(':libroId')
+    async update(@Param('libroId') libroId: string, @Body() libroDto: LibroDto) {
+      const biblioteca : Libro = plainToInstance(Libro, libroDto);
+      return await this.libroService.update(libroId, biblioteca);
+    }
+  
+    @Delete(':libroId')
+    @HttpCode(204)
+    async delete(@Param('libroId') libroId: string) {
+      return await this.libroService.delete(libroId);
+    }
 }

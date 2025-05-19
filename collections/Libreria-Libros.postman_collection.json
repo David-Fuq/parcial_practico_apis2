@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "b6495298-eaa8-48ba-ab73-4bd745e46f9f",
+		"name": "Libreria-Libros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39038264"
+	},
+	"item": [
+		{
+			"name": "Crear biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.globals.set(\"biblioteca_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"direccion\": \"Calle 123\",\r\n  \"ciudad\": \"Ciudad Ejemplo\",\r\n  \"hora_apertura\": \"09:00:00\",\r\n  \"hora_cierre\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear libro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.globals.set(\"libro_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Cien años de soledad\",\r\n  \"autor\": \"Gabriel García Márquez\",\r\n  \"fecha_publicacion\": \"1967-05-30\",\r\n  \"isbn\": \"978-0307474728\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/libros",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"libros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add book to library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}",
+						"libros",
+						"{{libro_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add book to library",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}",
+								"libros",
+								"{{libro_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"0826a117-8fab-4001-bbef-d65baed50b62\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"09:00:00\",\n    \"hora_cierre\": \"18:00:00\",\n    \"libros\": [\n        {\n            \"id\": \"2ed80819-a491-4c5e-8496-31e150c03648\",\n            \"titulo\": \"Cien años de soledad\",\n            \"autor\": \"Gabriel García Márquez\",\n            \"fecha_publicacion\": \"1967-05-30T05:00:00.000Z\",\n            \"isbn\": \"978-0307474728\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Find books from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Find books from library",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"0826a117-8fab-4001-bbef-d65baed50b62\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"09:00:00\",\n    \"hora_cierre\": \"18:00:00\",\n    \"libros\": [\n        {\n            \"id\": \"2ed80819-a491-4c5e-8496-31e150c03648\",\n            \"titulo\": \"Cien años de soledad\",\n            \"autor\": \"Gabriel García Márquez\",\n            \"fecha_publicacion\": \"1967-05-30T05:00:00.000Z\",\n            \"isbn\": \"978-0307474728\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Find book from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}",
+						"libros",
+						"{{libro_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Find book from library",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}",
+								"libros",
+								"{{libro_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"af0137c2-f92b-4106-b8d1-df71333e35d6\",\r\n    \"titulo\": \"Cien años de soledad\",\r\n    \"autor\": \"Gabriel García Márquez\",\r\n    \"fecha_publicacion\": \"1967-05-30T05:00:00.000Z\",\r\n    \"isbn\": \"978-0307474728\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete book from library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}",
+						"libros",
+						"{{libro_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete book from library",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros/{{libro_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}",
+								"libros",
+								"{{libro_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "UpdateBookes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n  \"titulo\": \"Cien años de soledad\",\r\n  \"autor\": \"Gabriel García Márquez\",\r\n  \"fecha_publicacion\": \"1967-05-30\",\r\n  \"isbn\": \"978-0307474728\"\r\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}",
+						"libros"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "UpdateBookes",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n  \"titulo\": \"Cien años de soledad\",\r\n  \"autor\": \"Gabriel García Márquez\",\r\n  \"fecha_publicacion\": \"1967-05-30\",\r\n  \"isbn\": \"978-0307474728\"\r\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}/libros",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}",
+								"libros"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"d617107c-da7d-4c64-b74d-6e9da4c6c11c\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"09:00:00\",\n    \"hora_cierre\": \"18:00:00\",\n    \"libros\": [\n        {\n            \"titulo\": \"Cien años de soledad\",\n            \"autor\": \"Gabriel García Márquez\",\n            \"fecha_publicacion\": \"1967-05-30\",\n            \"isbn\": \"978-0307474728\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}

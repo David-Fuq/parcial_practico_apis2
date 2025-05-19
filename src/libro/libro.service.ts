@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateLibroDto } from './dto/create-libro.dto';
-import { UpdateLibroDto } from './dto/update-libro.dto';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { Libro } from './entities/libro.entity';
 import { Repository } from 'typeorm';

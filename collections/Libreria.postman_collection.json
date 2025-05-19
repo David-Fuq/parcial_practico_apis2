@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "2106a798-3249-4c95-98d6-158d6ee2c97a",
+		"name": "Libreria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39038264"
+	},
+	"item": [
+		{
+			"name": "Crear biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"pm.globals.set(\"biblioteca_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"direccion\": \"Calle 123\",\r\n  \"ciudad\": \"Ciudad Ejemplo\",\r\n  \"hora_apertura\": \"09:00:00\",\r\n  \"hora_cierre\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear biblioteca",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"direccion\": \"Calle 123\",\r\n  \"ciudad\": \"Ciudad Ejemplo\",\r\n  \"hora_apertura\": \"09:00:00\",\r\n  \"hora_cierre\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"d6c4ee28-18f7-4d83-a675-e4004324fbbb\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"09:00:00\",\n    \"hora_cierre\": \"18:00:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Find all bibliotecas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Find all bibliotecas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "[\n    {\n        \"id\": \"d6c4ee28-18f7-4d83-a675-e4004324fbbb\",\n        \"name\": \"Biblioteca Central\",\n        \"direccion\": \"Calle 123\",\n        \"ciudad\": \"Ciudad Ejemplo\",\n        \"hora_apertura\": \"09:00:00\",\n        \"hora_cierre\": \"18:00:00\",\n        \"libros\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Find biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Find biblioteca",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"d6c4ee28-18f7-4d83-a675-e4004324fbbb\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"09:00:00\",\n    \"hora_cierre\": \"18:00:00\",\n    \"libros\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Update biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"direccion\": \"Calle 123\",\r\n  \"ciudad\": \"Ciudad Ejemplo\",\r\n  \"hora_apertura\": \"10:00:00\",\r\n  \"hora_cierre\": \"18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update biblioteca",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Biblioteca Central\",\r\n  \"direccion\": \"Calle 123\",\r\n  \"ciudad\": \"Ciudad Ejemplo\",\r\n  \"hora_apertura\": \"10:00:00\",\r\n  \"hora_cierre\": \"18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": "{\n    \"id\": \"f78403fb-b318-4f2c-b717-8d85c292b09c\",\n    \"name\": \"Biblioteca Central\",\n    \"direccion\": \"Calle 123\",\n    \"ciudad\": \"Ciudad Ejemplo\",\n    \"hora_apertura\": \"10:00:00\",\n    \"hora_cierre\": \"18:00:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete libreria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"bibliotecas",
+						"{{biblioteca_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update biblioteca Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/bibliotecas/{{biblioteca_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"bibliotecas",
+								"{{biblioteca_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "",
+					"header": [],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
