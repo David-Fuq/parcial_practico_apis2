@@ -12,7 +12,7 @@ export class LibroService {
   ) {}  
 
   async create(libro: Libro) : Promise<Libro> {
-    if (libro.fecha_publicacion > new Date()) {
+    if (new Date(libro.fecha_publicacion) > new Date()) {
       throw new BadRequestException('La fecha de publicación no puede ser mayor o igual a la fecha actual');
     }
     return await this.libroRepository.save(libro);

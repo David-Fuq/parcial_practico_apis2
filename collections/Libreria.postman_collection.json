@@ -675,16 +675,24 @@
 							]
 						}
 					},
-					"status": "No Content",
-					"code": 204,
-					"_postman_previewlanguage": "",
-					"header": [],
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [
 						{
 							"expires": "Invalid Date"
 						}
 					],
-					"body": ""
+					"body": "{\n    \"message\": \"La biblioteca no existe\",\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
 				}
 			]
 		}
